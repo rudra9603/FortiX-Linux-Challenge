@@ -8,13 +8,15 @@ Built for the FortiXai community and offensive security engineers, this project 
 
 To truly master privilege escalation, you have to engineer the exploits and the vulnerable environments yourself. This repository is divided into three core phases:
 
-### 1. FortiX-Enum (The Scripter's Path)
-A custom, lightweight Bash script designed to automate local enumeration. Instead of relying blindly on tools like LinPEAS, `FortiX-Enum` is built from scratch to understand exactly what is being queried under the hood.
+### 1. FortiX-Enum (The Scripter's Path) - *Active Development*
+A custom, lightweight Bash script designed to automate local enumeration. Instead of relying blindly on heavy scripts, `FortiX-Enum` is built from scratch to understand exactly what is being queried under the hood.
 
 **Current Capabilities:**
-* Sudo privilege misconfigurations (`sudo -l`)
-* SUID binary detection
-* *(In Development: Cron Jobs, Binary Capabilities, Writable PATHs)*
+* **Sudo Privileges:** Detects misconfigured `sudo -l` entries (e.g., `NOPASSWD`).
+* **SUID Binaries:** Locates files with the SUID bit set that could be abused.
+* **Cron Jobs:** Enumerates scheduled tasks and hunts for world-writable cron scripts.
+* **Binary Capabilities:** Scans for misconfigured Linux capabilities (`getcap`) that grant stealthy root privileges.
+* *(In Development: Writable PATHs, Wildcard injection vectors)*
 
 ### 2. The Vulnerable Sandbox (The Builder's Path) - *Coming Soon*
 A vulnerable-by-design environment (Docker/VM). This sandbox will feature multi-layered privilege escalation paths, requiring attackers to chain misconfigurations from a low-privileged user up to root.
