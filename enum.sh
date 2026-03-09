@@ -21,3 +21,21 @@ echo "[*] CHECKING FOR SUID BINARIES..."
 find / -perm -u=s -type f 2>/dev/null
 echo "------------------------------------------"
 echo ""
+# 3. Check for Cron Jobs
+echo "[*] CHECKING CRON JOBS (/etc/crontab)..."
+# Displaying the system-wide crontab
+cat /etc/crontab 2>/dev/null
+echo "------------------------------------------"
+echo ""
+
+# Optional but powerful: Find world-writable files in common cron directories
+echo "[*] CHECKING FOR WRITABLE CRON SCRIPTS..."
+find /etc/cron* -type f -perm -0002 2>/dev/null
+echo "------------------------------------------"
+echo ""
+# 4. Check for Binary Capabilities
+echo "[*] CHECKING BINARY CAPABILITIES..."
+# Recursively checking all files from the root directory for capabilities
+getcap -r / 2>/dev/null
+echo "------------------------------------------"
+echo ""
