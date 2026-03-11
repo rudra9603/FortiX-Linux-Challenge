@@ -39,3 +39,15 @@ echo "[*] CHECKING BINARY CAPABILITIES..."
 getcap -r / 2>/dev/null
 echo "------------------------------------------"
 echo ""
+# 5. Check for Writable $PATH Directories
+echo "[*] CHECKING \$PATH FOR WRITABLE DIRECTORIES..."
+# Split the PATH variable by colons and check each directory for write permissions
+IFS=':' read -ra PATH_DIRS <<< "$PATH"
+for dir in "${PATH_DIRS[@]}"; do
+    if [ -d "$dir" ] && [ -w "$dir" ]; then
+        echo "[!] WARNING: Directory '$dir' in your PATH is writable!"
+    fi
+done
+echo "------------------------------------------"
+echo "[+] FortiX-Enum complete. Happy hunting!"
+echo "=========================================="
